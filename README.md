@@ -47,6 +47,7 @@ Before production launch, engineering should:
 - Store the API key as a secure environment variable, for example `ANTHROPIC_API_KEY`.
 - Create a secure API route/proxy such as `/api/chat`.
 - Add usage limits, monitoring, and abuse prevention.
+- Sandbox deployment test
 - Remove any client-side exposed API keys before public release.
 - Perform a security review before live learner/customer access.
 
