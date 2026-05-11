@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
   *{box-sizing:border-box;margin:0;padding:0}
   :root{
     --ink:#1a1a2e;--ink2:#4a4a6a;--ink3:#8888aa;
@@ -106,16 +108,436 @@
   .rec-item::before{content:'✓';color:var(--cf);font-weight:700;flex-shrink:0;margin-top:1px}
 
   @media(max-width:520px){.intro-grid{grid-template-columns:1fr}.tech-grid{grid-template-columns:1fr}}
+</style>
 
-/* Vercel/Circle iframe helpers */
-.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.tabs::-webkit-scrollbar{height:4px}
-.tabs::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
-@media(max-width:720px){
-  .hero{padding:28px 20px 24px}
-  .hero-meta{flex-wrap:wrap;gap:8px 14px}
-  .tabs{padding:0 12px}
-  .tab{padding:12px 14px;font-size:12px}
-  .content{padding:18px}
-  .detail-body > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+<div class="hero">
+  <div class="badge">📚 Spark by ntegral · Finance Literacy Series</div>
+  <h1>Understanding Your Financial Statements</h1>
+  <p>The three reports every ISV founder must know — and how to use them to make smarter business decisions.</p>
+  <div class="hero-meta">
+    <span>Module 1 of 4</span>
+    <span>~12 min read</span>
+    <span>Beginner friendly</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('overview')">Overview</div>
+  <div class="tab" onclick="showTab('income')">Income Statement</div>
+  <div class="tab" onclick="showTab('cashflow')">Cash Flow</div>
+  <div class="tab" onclick="showTab('balance')">Balance Sheet</div>
+  <div class="tab" onclick="showTab('connect')">How They Connect</div>
+  <div class="tab" onclick="showTab('techstack')">Tech Stack</div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="content active" id="tab-overview">
+  <p class="section-label">The big picture</p>
+
+  <div class="intro-grid">
+    <div class="stmt-card is" onclick="showTab('income')">
+      <div class="stmt-pill">Profitability</div>
+      <div class="stmt-icon">📈</div>
+      <h3>Income Statement</h3>
+      <p>Are you making money? Revenue minus expenses equals profit (or loss).</p>
+    </div>
+    <div class="stmt-card cf" onclick="showTab('cashflow')">
+      <div class="stmt-pill">Liquidity</div>
+      <div class="stmt-icon">💵</div>
+      <h3>Cash Flow Statement</h3>
+      <p>Do you have money to pay bills today? Tracks real cash in and out.</p>
+    </div>
+    <div class="stmt-card bs" onclick="showTab('balance')">
+      <div class="stmt-pill">Net Worth</div>
+      <div class="stmt-icon">⚖️</div>
+      <h3>Balance Sheet</h3>
+      <p>What do you own vs. owe? A snapshot of your company's financial health.</p>
+    </div>
+  </div>
+
+  <div class="callout amber" style="margin-bottom:20px">
+    <strong>Why this matters for ISVs:</strong> Many software founders focus only on revenue — but profitable companies go bankrupt from poor cash management. All three statements tell a different chapter of your financial story. Your accountant will prepare these; your job is to <em>read and act on them</em>.
+  </div>
+
+  <p class="section-label">The founder's question each statement answers</p>
+
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+    <div style="background:var(--card);border-radius:var(--r2);padding:14px 16px;border:1px solid var(--border);display:flex;gap:14px;align-items:flex-start">
+      <span style="font-size:20px;flex-shrink:0">📈</span>
+      <div><span style="font-weight:600;font-size:13px;color:var(--is-d)">"Are we profitable this quarter?"</span><br><span style="font-size:12px;color:var(--ink2)">→ Income Statement tells you revenue, cost of goods, and whether you're actually earning.</span></div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--r2);padding:14px 16px;border:1px solid var(--border);display:flex;gap:14px;align-items:flex-start">
+      <span style="font-size:20px;flex-shrink:0">💵</span>
+      <div><span style="font-weight:600;font-size:13px;color:var(--cf-d)">"Can we make payroll next Friday?"</span><br><span style="font-size:12px;color:var(--ink2)">→ Cash Flow Statement shows real money movement — not accounting paper profit.</span></div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--r2);padding:14px 16px;border:1px solid var(--border);display:flex;gap:14px;align-items:flex-start">
+      <span style="font-size:20px;flex-shrink:0">⚖️</span>
+      <div><span style="font-weight:600;font-size:13px;color:var(--bs-d)">"If we needed a loan, could we get one?"</span><br><span style="font-size:12px;color:var(--ink2)">→ Balance Sheet shows your assets, liabilities, and equity — what lenders and investors examine first.</span></div>
+    </div>
+  </div>
+
+  <p class="section-label">Core principle from Noreen et al.</p>
+  <div class="callout blue">
+    <strong>Managerial Accounting for Managers</strong> emphasizes that financial statements serve two audiences: external stakeholders (investors, lenders) who need GAAP-compliant reports, and <em>internal managers</em> who need the data to make decisions. As an ISV founder, you wear both hats. The goal here is to make you a confident consumer of these reports — not a preparer.
+  </div>
+</div>
+
+<!-- INCOME STATEMENT -->
+<div class="content" id="tab-income">
+  <p class="section-label">Income Statement · P&L · Profit & Loss</p>
+
+  <div class="callout blue" style="margin-bottom:16px">
+    <strong>What it is:</strong> A movie, not a photo. The Income Statement covers a <em>period of time</em> (month, quarter, year) and answers: did the business earn more than it spent?
+  </div>
+
+  <div class="detail-block open">
+    <div class="detail-header" onclick="toggleBlock(this)">
+      <div class="stmt-icon" style="background:rgba(37,99,235,.1);width:28px;height:28px;border-radius:8px;font-size:14px;margin:0">📈</div>
+      <h4 style="color:var(--is-d)">SaaS Co. — Income Statement (Q1 2025)</h4>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="detail-body">
+      <div class="line-row bold"><span>Revenue</span><span></span></div>
+      <div class="line-row indent pos"><span class="label">Subscription revenue (MRR × 3)</span><span class="val">$180,000</span></div>
+      <div class="line-row indent pos"><span class="label">Professional services</span><span class="val">$24,000</span></div>
+      <div class="line-row subtotal"><span>Total Revenue</span><span class="val" style="color:var(--cf-d)">$204,000</span></div>
+
+      <div class="line-row bold" style="margin-top:10px"><span>Cost of Revenue (COGS)</span><span></span></div>
+      <div class="line-row indent2 neg"><span class="label">Hosting & infrastructure</span><span class="val">($18,000)</span></div>
+      <div class="line-row indent2 neg"><span class="label">Customer support staff</span><span class="val">($12,000)</span></div>
+      <div class="line-row subtotal"><span>Gross Profit</span><span class="val" style="color:var(--cf-d)">$174,000</span></div>
+      <div class="line-row subtotal"><span style="font-size:11px;color:var(--ink3)">Gross Margin</span><span class="val" style="font-size:11px;color:var(--ink3)">85%</span></div>
+
+      <div class="line-row bold" style="margin-top:10px"><span>Operating Expenses</span><span></span></div>
+      <div class="line-row indent2 neg"><span class="label">Salaries (R&D, Sales, G&A)</span><span class="val">($120,000)</span></div>
+      <div class="line-row indent2 neg"><span class="label">Marketing & ads</span><span class="val">($22,000)</span></div>
+      <div class="line-row indent2 neg"><span class="label">Software & tools</span><span class="val">($8,000)</span></div>
+      <div class="line-row indent2 neg"><span class="label">Depreciation</span><span class="val">($4,000)</span></div>
+
+      <div class="line-row total"><span>Net Income (Profit)</span><span class="val" style="color:var(--cf-d)">$20,000</span></div>
+    </div>
+  </div>
+
+  <p class="section-label" style="margin-top:20px">Key metrics to track (Noreen Ch. 12)</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+    <div style="background:var(--is-l);border-radius:var(--r2);padding:12px;text-align:center">
+      <div style="font-size:20px;font-weight:600;color:var(--is-d);font-family:'DM Mono',monospace">85%</div>
+      <div style="font-size:11px;color:var(--ink2)">Gross Margin</div>
+      <div style="font-size:10px;color:var(--ink3);margin-top:2px">SaaS benchmark: >70%</div>
+    </div>
+    <div style="background:var(--cf-l);border-radius:var(--r2);padding:12px;text-align:center">
+      <div style="font-size:20px;font-weight:600;color:var(--cf-d);font-family:'DM Mono',monospace">10%</div>
+      <div style="font-size:11px;color:var(--ink2)">Net Margin</div>
+      <div style="font-size:10px;color:var(--ink3);margin-top:2px">$20k / $204k</div>
+    </div>
+    <div style="background:var(--bs-l);border-radius:var(--r2);padding:12px;text-align:center">
+      <div style="font-size:20px;font-weight:600;color:var(--bs-d);font-family:'DM Mono',monospace">$68k</div>
+      <div style="font-size:11px;color:var(--ink2)">MRR</div>
+      <div style="font-size:10px;color:var(--ink3);margin-top:2px">Monthly recurring</div>
+    </div>
+  </div>
+
+  <div class="callout amber">
+    <strong>Founder watch-out:</strong> High revenue with low net margin often means your operating costs are growing faster than revenue — a common ISV scaling trap. Your accountant should flag this monthly. Ask them: <em>"What's our burn multiple this quarter?"</em>
+  </div>
+</div>
+
+<!-- CASH FLOW -->
+<div class="content" id="tab-cashflow">
+  <p class="section-label">Statement of Cash Flows</p>
+
+  <div class="callout green" style="margin-bottom:16px">
+    <strong>What it is:</strong> Cash is king. You can be profitable on paper and still run out of money. The Cash Flow Statement shows where real dollars came from and where they went — across three buckets.
+  </div>
+
+  <div class="detail-block open">
+    <div class="detail-header" onclick="toggleBlock(this)">
+      <div class="stmt-icon" style="background:rgba(5,150,105,.1);width:28px;height:28px;border-radius:8px;font-size:14px;margin:0">💵</div>
+      <h4 style="color:var(--cf-d)">SaaS Co. — Cash Flow Statement (Q1 2025)</h4>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="detail-body">
+      <div class="line-row bold"><span>Operating Activities</span><span style="font-size:11px;color:var(--ink3);font-weight:400">Day-to-day business</span></div>
+      <div class="line-row indent pos"><span class="label">Cash received from customers</span><span class="val">$198,000</span></div>
+      <div class="line-row indent neg"><span class="label">Cash paid to employees</span><span class="val">($132,000)</span></div>
+      <div class="line-row indent neg"><span class="label">Cash paid to vendors/tools</span><span class="val">($28,000)</span></div>
+      <div class="line-row subtotal pos"><span>Net cash from operations</span><span class="val" style="color:var(--cf-d)">$38,000</span></div>
+
+      <div class="line-row bold" style="margin-top:10px"><span>Investing Activities</span><span style="font-size:11px;color:var(--ink3);font-weight:400">Assets & growth</span></div>
+      <div class="line-row indent neg"><span class="label">New equipment purchased</span><span class="val">($15,000)</span></div>
+      <div class="line-row subtotal neg"><span>Net cash from investing</span><span class="val">($15,000)</span></div>
+
+      <div class="line-row bold" style="margin-top:10px"><span>Financing Activities</span><span style="font-size:11px;color:var(--ink3);font-weight:400">Debt & equity</span></div>
+      <div class="line-row indent pos"><span class="label">Loan received (SBA)</span><span class="val">$50,000</span></div>
+      <div class="line-row indent neg"><span class="label">Loan repayment</span><span class="val">($8,000)</span></div>
+      <div class="line-row subtotal pos"><span>Net cash from financing</span><span class="val" style="color:var(--cf-d)">$42,000</span></div>
+
+      <div class="line-row total pos"><span>Net increase in cash</span><span class="val" style="color:var(--cf-d)">$65,000</span></div>
+      <div class="line-row"><span class="label">Opening cash balance</span><span class="val">$30,000</span></div>
+      <div class="line-row bold pos"><span>Closing cash balance</span><span class="val" style="color:var(--cf-d)">$95,000</span></div>
+    </div>
+  </div>
+
+  <p class="section-label" style="margin-top:20px">The three buckets explained</p>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
+    <div style="background:var(--card);border-radius:var(--r2);padding:12px 14px;border-left:3px solid var(--cf);border:1px solid var(--border)">
+      <div style="font-weight:600;font-size:13px;margin-bottom:4px">🔄 Operating — your engine</div>
+      <div style="font-size:12px;color:var(--ink2)">Cash generated by selling your product. <strong>This must be positive</strong> for a sustainable ISV. A negative operating cash flow means your business model is subsidized by investors or debt.</div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--r2);padding:12px 14px;border-left:3px solid var(--is);border:1px solid var(--border)">
+      <div style="font-weight:600;font-size:13px;margin-bottom:4px">🏗️ Investing — building the future</div>
+      <div style="font-size:12px;color:var(--ink2)">Spending on servers, software, or acquisitions. Negative is often healthy — it means you're investing in growth. Watch for overspending here relative to operating income.</div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--r2);padding:12px 14px;border-left:3px solid var(--bs);border:1px solid var(--border)">
+      <div style="font-weight:600;font-size:13px;margin-bottom:4px">🏦 Financing — fuel from outside</div>
+      <div style="font-size:12px;color:var(--ink2)">Loans taken, equity raised, or dividends paid. Positive means you're bringing in external capital. Ask: do we <em>need</em> this, or are we borrowing to cover operating losses?</div>
+    </div>
+  </div>
+
+  <div class="callout amber">
+    <strong>Founder watch-out:</strong> Notice the income statement showed $20k net profit, but operating cash flow is $38k. Why the difference? Depreciation ($4k non-cash) and timing of customer payments. <em>This gap is exactly why you need both statements.</em>
+  </div>
+</div>
+
+<!-- BALANCE SHEET -->
+<div class="content" id="tab-balance">
+  <p class="section-label">Balance Sheet · Statement of Financial Position</p>
+
+  <div class="callout purple" style="margin-bottom:16px">
+    <strong>What it is:</strong> A photo, not a movie. The Balance Sheet is a <em>point-in-time snapshot</em>. It must always balance: <strong>Assets = Liabilities + Equity</strong>. Think of it as what you own, what you owe, and what's left for you.
+  </div>
+
+  <div class="detail-block open">
+    <div class="detail-header" onclick="toggleBlock(this)">
+      <div class="stmt-icon" style="background:rgba(124,58,237,.1);width:28px;height:28px;border-radius:8px;font-size:14px;margin:0">⚖️</div>
+      <h4 style="color:var(--bs-d)">SaaS Co. — Balance Sheet (Mar 31, 2025)</h4>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="detail-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <div class="line-row bold"><span style="color:var(--is-d)">ASSETS (What we own)</span></div>
+          <div class="line-row" style="font-size:11px;color:var(--ink3);font-weight:500;padding-top:10px"><span>Current assets</span></div>
+          <div class="line-row indent pos"><span class="label">Cash & equivalents</span><span class="val">$95,000</span></div>
+          <div class="line-row indent pos"><span class="label">Accounts receivable</span><span class="val">$28,000</span></div>
+          <div class="line-row indent pos"><span class="label">Prepaid expenses</span><span class="val">$6,000</span></div>
+          <div class="line-row subtotal"><span>Current assets</span><span class="val">$129,000</span></div>
+          <div class="line-row" style="font-size:11px;color:var(--ink3);font-weight:500;padding-top:10px"><span>Non-current assets</span></div>
+          <div class="line-row indent pos"><span class="label">Equipment (net)</span><span class="val">$48,000</span></div>
+          <div class="line-row indent pos"><span class="label">Capitalized dev costs</span><span class="val">$35,000</span></div>
+          <div class="line-row total"><span>TOTAL ASSETS</span><span class="val" style="color:var(--is-d)">$212,000</span></div>
+        </div>
+        <div>
+          <div class="line-row bold"><span style="color:#dc2626">LIABILITIES (What we owe)</span></div>
+          <div class="line-row" style="font-size:11px;color:var(--ink3);font-weight:500;padding-top:10px"><span>Current liabilities</span></div>
+          <div class="line-row indent neg"><span class="label">Accounts payable</span><span class="val">$14,000</span></div>
+          <div class="line-row indent neg"><span class="label">Deferred revenue</span><span class="val">$22,000</span></div>
+          <div class="line-row subtotal"><span>Current liabilities</span><span class="val">$36,000</span></div>
+          <div class="line-row" style="font-size:11px;color:var(--ink3);font-weight:500;padding-top:10px"><span>Long-term liabilities</span></div>
+          <div class="line-row indent neg"><span class="label">Long-term loan</span><span class="val">$42,000</span></div>
+          <div class="line-row subtotal"><span>Total Liabilities</span><span class="val">$78,000</span></div>
+          <div class="line-row bold" style="padding-top:12px"><span style="color:var(--cf-d)">EQUITY (What's left for us)</span></div>
+          <div class="line-row indent"><span class="label">Common stock</span><span class="val">$114,000</span></div>
+          <div class="line-row indent"><span class="label">Retained earnings</span><span class="val">$20,000</span></div>
+          <div class="line-row subtotal"><span>Total Equity</span><span class="val" style="color:var(--cf-d)">$134,000</span></div>
+          <div class="line-row total"><span>LIAB. + EQUITY</span><span class="val" style="color:var(--bs-d)">$212,000</span></div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:12px;font-size:11px;background:var(--bs-l);padding:8px;border-radius:var(--r2);color:var(--bs-d);font-weight:600">✓ Assets ($212k) = Liabilities ($78k) + Equity ($134k) — The equation balances</div>
+    </div>
+  </div>
+
+  <div class="callout amber" style="margin-top:14px">
+    <strong>ISV watch-out — Deferred Revenue:</strong> SaaS companies that bill annually upfront show deferred revenue as a liability (you've taken money but haven't delivered the service yet). This is normal and healthy — but it means your cash flow will always look better than your income statement. Your accountant should reconcile this monthly.
+  </div>
+</div>
+
+<!-- HOW THEY CONNECT -->
+<div class="content" id="tab-connect">
+  <p class="section-label">The financial ecosystem</p>
+  <div class="callout blue" style="margin-bottom:16px">
+    <strong>Key insight (Noreen et al., Ch. 1):</strong> The three statements are not independent — they are deeply interconnected. Net income flows into equity. Ending cash flows to the balance sheet. Understanding the links turns you from a passive reader into an active decision-maker.
+  </div>
+
+  <div class="flow-wrap" style="margin-bottom:16px">
+    <svg width="100%" viewBox="0 0 640 460" role="img">
+      <title>How the three financial statements connect</title>
+      <desc>Diagram showing net income flowing from the income statement to both the cash flow statement and retained earnings on the balance sheet, and ending cash flowing from the cash flow statement to the balance sheet.</desc>
+      <defs>
+        <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- Income Statement box -->
+      <rect x="20" y="30" width="180" height="160" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1"/>
+      <rect x="20" y="30" width="180" height="32" rx="12" fill="#2563eb"/>
+      <rect x="20" y="50" width="180" height="12" fill="#2563eb"/>
+      <text font-family="Sora,sans-serif" font-size="12" font-weight="600" fill="#fff" x="110" y="51" text-anchor="middle">Income Statement</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#1e40af" x="30" y="82">Revenue</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#1e40af" x="30" y="98">− Cost of Revenue</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#1e40af" x="30" y="114">= Gross Profit</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#1e40af" x="30" y="130">− Operating Expenses</text>
+      <line x1="30" y1="140" x2="190" y2="140" stroke="#bfdbfe" stroke-width="0.5"/>
+      <text font-family="Sora,sans-serif" font-size="11" font-weight="600" fill="#1e40af" x="30" y="156">= NET INCOME</text>
+      <text font-family="Sora,sans-serif" font-size="11" font-weight="700" fill="#059669" x="155" y="156" text-anchor="end">$20k</text>
+      <text font-family="Sora,sans-serif" font-size="9" fill="#64748b" x="110" y="178" text-anchor="middle">Period: Q1 2025</text>
+
+      <!-- Cash Flow Statement box -->
+      <rect x="230" y="30" width="180" height="200" rx="12" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1"/>
+      <rect x="230" y="30" width="180" height="32" rx="12" fill="#059669"/>
+      <rect x="230" y="50" width="180" height="12" fill="#059669"/>
+      <text font-family="Sora,sans-serif" font-size="12" font-weight="600" fill="#fff" x="320" y="51" text-anchor="middle">Cash Flow Statement</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#065f46" x="240" y="82">Start: Net income $20k</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#065f46" x="240" y="98">+ Depreciation add-back</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#065f46" x="240" y="114">± Working capital changes</text>
+      <line x1="240" y1="124" x2="400" y2="124" stroke="#a7f3d0" stroke-width="0.5"/>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#065f46" x="240" y="138">= Operating cash $38k</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#065f46" x="240" y="154">+ Investing ($15k)</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#065f46" x="240" y="170">+ Financing $42k</text>
+      <line x1="240" y1="180" x2="400" y2="180" stroke="#a7f3d0" stroke-width="0.5"/>
+      <text font-family="Sora,sans-serif" font-size="11" font-weight="600" fill="#065f46" x="240" y="196">= ENDING CASH</text>
+      <text font-family="Sora,sans-serif" font-size="11" font-weight="700" fill="#059669" x="400" y="196" text-anchor="end">$95k</text>
+      <text font-family="Sora,sans-serif" font-size="9" fill="#64748b" x="320" y="218" text-anchor="middle">Period: Q1 2025</text>
+
+      <!-- Balance Sheet box -->
+      <rect x="440" y="30" width="185" height="240" rx="12" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1"/>
+      <rect x="440" y="30" width="185" height="32" rx="12" fill="#7c3aed"/>
+      <rect x="440" y="50" width="185" height="12" fill="#7c3aed"/>
+      <text font-family="Sora,sans-serif" font-size="12" font-weight="600" fill="#fff" x="532" y="51" text-anchor="middle">Balance Sheet</text>
+      <text font-family="Sora,sans-serif" font-size="11" font-weight="600" fill="#4c1d95" x="450" y="80">ASSETS</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#6d28d9" x="450" y="96">Cash (from CF stmt)</text>
+      <text font-family="Sora,sans-serif" font-size="10" font-weight="700" fill="#059669" x="620" y="96" text-anchor="end">$95k</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#6d28d9" x="450" y="112">Other current assets</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#6d28d9" x="450" y="128">Non-current assets</text>
+      <line x1="450" y1="138" x2="620" y2="138" stroke="#ddd6fe" stroke-width="0.5"/>
+      <text font-family="Sora,sans-serif" font-size="10" font-weight="600" fill="#4c1d95" x="450" y="152">Total Assets $212k</text>
+      <line x1="450" y1="162" x2="620" y2="162" stroke="#ddd6fe" stroke-width="1"/>
+      <text font-family="Sora,sans-serif" font-size="11" font-weight="600" fill="#4c1d95" x="450" y="178">LIABILITIES + EQUITY</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#6d28d9" x="450" y="194">Total Liabilities $78k</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#6d28d9" x="450" y="210">Paid-in capital $114k</text>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#6d28d9" x="450" y="226">Retained earnings (NI)</text>
+      <text font-family="Sora,sans-serif" font-size="10" font-weight="700" fill="#059669" x="620" y="226" text-anchor="end">$20k</text>
+      <line x1="450" y1="236" x2="620" y2="236" stroke="#ddd6fe" stroke-width="0.5"/>
+      <text font-family="Sora,sans-serif" font-size="10" font-weight="600" fill="#4c1d95" x="450" y="250">Total L+E $212k ✓</text>
+      <text font-family="Sora,sans-serif" font-size="9" fill="#64748b" x="532" y="265" text-anchor="middle">As of: Mar 31, 2025</text>
+
+      <!-- Arrows between statements -->
+      <!-- Net income → Cash Flow (starts from IS) -->
+      <path d="M 200 152 L 228 152" stroke="#2563eb" stroke-width="1.5" fill="none" marker-end="url(#arr2)" stroke-dasharray="5,3"/>
+      <text font-family="Sora,sans-serif" font-size="9" fill="#2563eb" x="214" y="145" text-anchor="middle">Net income</text>
+
+      <!-- Net income → Retained Earnings on BS -->
+      <path d="M 110 190 L 110 320 L 532 320 L 532 270" stroke="#2563eb" stroke-width="1.5" fill="none" marker-end="url(#arr2)" stroke-dasharray="5,3"/>
+      <text font-family="Sora,sans-serif" font-size="9" fill="#2563eb" x="300" y="338" text-anchor="middle">Net income → Retained Earnings</text>
+
+      <!-- Ending Cash → Cash on Balance Sheet -->
+      <path d="M 410 193 L 437 193 L 437 90 L 438 90" stroke="#059669" stroke-width="1.5" fill="none" marker-end="url(#arr2)"/>
+      <text font-family="Sora,sans-serif" font-size="9" fill="#059669" x="424" y="185" text-anchor="middle" transform="rotate(-90,424,185)">Ending cash</text>
+
+      <!-- Legend -->
+      <rect x="20" y="370" width="600" height="70" rx="8" fill="none" stroke="#e2e8f0" stroke-width="0.5"/>
+      <text font-family="Sora,sans-serif" font-size="10" font-weight="600" fill="#64748b" x="30" y="390">HOW THEY LINK</text>
+      <line x1="30" y1="405" x2="60" y2="405" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#1e40af" x="65" y="409">Net Income → starts the Cash Flow and adds to Retained Earnings on Balance Sheet</text>
+      <line x1="30" y1="425" x2="60" y2="425" stroke="#059669" stroke-width="1.5"/>
+      <text font-family="Sora,sans-serif" font-size="10" fill="#065f46" x="65" y="429">Ending Cash → becomes the Cash line on the Balance Sheet (must match)</text>
+    </svg>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div class="callout green">
+      <strong>Link 1 — Net Income flows everywhere:</strong> The bottom line of the Income Statement ($20k) becomes the starting point for the Cash Flow Statement (indirect method) AND adds to Retained Earnings on the Balance Sheet. Change one, you change all three.
+    </div>
+    <div class="callout blue">
+      <strong>Link 2 — Ending Cash must match:</strong> The closing cash balance on your Cash Flow Statement ($95k) must equal the "Cash" line on your Balance Sheet. If they don't match, there's an error. Your accountant will catch this — now you'll know to look for it.
+    </div>
+    <div class="callout purple">
+      <strong>Link 3 — Equity is cumulative profit:</strong> Every profitable quarter adds to Retained Earnings on the Balance Sheet. This is how profitable operations build owner wealth over time without raising outside capital.
+    </div>
+  </div>
+</div>
+
+<!-- TECH STACK -->
+<div class="content" id="tab-techstack">
+  <p class="section-label">Recommended accounting tech stack for ISVs</p>
+  <div class="callout amber" style="margin-bottom:16px">
+    <strong>Professor's note:</strong> The best accounting system is one your bookkeeper actually uses consistently. Choose software that integrates with your payment processor (Stripe, PayPal), your bank, and your CRM. Below are the leading options for early-to-growth stage ISVs.
+  </div>
+
+  <div class="tech-grid">
+    <div class="tech-card" onclick="sendPrompt('Tell me more about QuickBooks Online for a SaaS ISV')">
+      <div class="tech-logo" style="background:#2CA01C;color:#fff;font-size:11px">QB</div>
+      <div>
+        <h4>QuickBooks Online</h4>
+        <p>The most widely used SMB accounting platform. Huge ecosystem of bookkeepers and CPAs. Excellent Stripe & PayPal integrations. Best for US-based ISVs with a local accountant.</p>
+        <span class="tech-badge badge-star">⭐ Most popular</span>
+      </div>
+    </div>
+    <div class="tech-card" onclick="sendPrompt('Tell me more about Xero for international SaaS companies')">
+      <div class="tech-logo" style="background:#13B5EA;color:#fff;font-size:11px">Xero</div>
+      <div>
+        <h4>Xero</h4>
+        <p>Cloud-native, beautiful UI, and strong multi-currency support. Preferred by international ISVs and companies with a global team. Excellent bank reconciliation.</p>
+        <span class="tech-badge badge-intl">🌍 Best for international</span>
+      </div>
+    </div>
+    <div class="tech-card" onclick="sendPrompt('Tell me more about Stripe Revenue Recognition for SaaS')">
+      <div class="tech-logo" style="background:#635BFF;color:#fff;font-size:11px">Str</div>
+      <div>
+        <h4>Stripe + Stripe Billing</h4>
+        <p>Not full accounting, but essential for ISVs. Handles MRR, deferred revenue, and automated invoicing. Integrate with QBO or Xero via native connector. Start here.</p>
+        <span class="tech-badge badge-star">⭐ SaaS-first</span>
+      </div>
+    </div>
+    <div class="tech-card" onclick="sendPrompt('Tell me about Bench Accounting for ISV founders')">
+      <div class="tech-logo" style="background:#1a1a2e;color:#a78bfa;font-size:11px">Bnch</div>
+      <div>
+        <h4>Bench Accounting</h4>
+        <p>Software + human bookkeeper combo. You get monthly financials without hiring an in-house accountant. Ideal for founders who want full outsourcing from day one.</p>
+        <span class="tech-badge badge-open">✓ Fully outsourced</span>
+      </div>
+    </div>
+    <div class="tech-card" onclick="sendPrompt('Tell me about Pilot.com for startup accounting')">
+      <div class="tech-logo" style="background:#0f172a;color:#38bdf8;font-size:11px">Plt</div>
+      <div>
+        <h4>Pilot.com</h4>
+        <p>VC-backed bookkeeping + CFO services built for startups. Handles GAAP financials, burn rate, and investor reporting. Scales from seed to Series B.</p>
+        <span class="tech-badge badge-scale">🚀 Investor-ready</span>
+      </div>
+    </div>
+    <div class="tech-card" onclick="sendPrompt('Tell me about FreshBooks for small ISVs')">
+      <div class="tech-logo" style="background:#e8453c;color:#fff;font-size:11px">FB</div>
+      <div>
+        <h4>FreshBooks</h4>
+        <p>Simpler than QBO, great for solo founders or very early ISVs. Strong invoicing, time tracking, and client management. Upgrade to QBO/Xero as you scale past $500k ARR.</p>
+        <span class="tech-badge badge-open">✓ Early stage</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="rec-box">
+    <h3>📋 Professor's recommended stack by stage</h3>
+    <div class="rec-list">
+      <div class="rec-item"><strong>Pre-revenue → $100k ARR:</strong> Stripe Billing + FreshBooks or Wave (free). Focus on invoicing and expense tracking. One part-time bookkeeper ($300–500/mo).</div>
+      <div class="rec-item"><strong>$100k → $1M ARR:</strong> Stripe + QuickBooks Online + monthly bookkeeper. Add a CPA for quarterly reviews. Budget: $800–1,500/mo total.</div>
+      <div class="rec-item"><strong>$1M → $5M ARR:</strong> Stripe + Xero or QBO + Pilot.com or fractional CFO. Monthly financial package delivered to you. Budget: $2,000–4,000/mo.</div>
+      <div class="rec-item"><strong>$5M+ ARR:</strong> Evaluate NetSuite or Sage Intacct for full ERP. Hire an in-house Controller. Your accountant becomes a strategic partner.</div>
+      <div class="rec-item"><strong>Always:</strong> Never skip the monthly review with your bookkeeper. Thirty minutes reading your three statements together is your highest-leverage financial habit.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.remove('active'));
+  document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+  const ids = ['overview','income','cashflow','balance','connect','techstack'];
+  const idx = ids.indexOf(id);
+  document.querySelectorAll('.tab')[idx].classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
 }
+function toggleBlock(header) {
+  header.parentElement.classList.toggle('open');
+}
+</script>
